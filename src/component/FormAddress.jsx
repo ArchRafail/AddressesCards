@@ -1,19 +1,21 @@
 import {useEffect, useState} from "react";
 import "./FormAddress.css"
+import {Types} from "../constants/Types.ts";
+
 
 export default function FormAddress(props) {
     let [id, setId] = useState(props.id || undefined)
     let [country, setCountry] = useState(props.country);
     let [city, setCity] = useState(props.city);
     let [street, setStreet] = useState(props.street);
-    let [type, setType] = useState(props.type || "office");
+    let [type, setType] = useState(props.type || Types.OFFICE);
 
     useEffect(() => {
         setId(props.id || undefined);
         setCountry(props.country);
         setCity(props.city);
         setStreet(props.street);
-        setType(props.type || "office");
+        setType(props.type || Types.OFFICE);
     }, [props.country, props.city, props.street, props.type])
 
     const handleClear = (event) => {
@@ -33,7 +35,7 @@ export default function FormAddress(props) {
             newAddress["id"] = id
         }
         try {
-            validateAddress(newAddress.country, newAddress.city, newAddress.street)
+            blankAudit(newAddress.country, newAddress.city, newAddress.street)
         } catch (err) {
             console.error(err.message);
             return
@@ -47,10 +49,10 @@ export default function FormAddress(props) {
         setCountry("");
         setCity("");
         setStreet("");
-        setType("office");
+        setType(Types.OFFICE);
     }
 
-    const validateAddress = (newCountry, newCity, newStreet) => {
+    const blankAudit = (newCountry, newCity, newStreet) => {
         if (!newCountry || newCountry.trim().length === 0) {
             throw new Error("Country field can't be empty!");
         }
@@ -85,12 +87,12 @@ export default function FormAddress(props) {
                 <label className="addressDesc">Type:</label>
                 <div className="radioButtons">
                     <div className="radioButton">
-                        <input type="radio" id="home" name="type" value="home" onChange={event => setType(event.target.value)} checked={type==="home"}/>
-                        <label htmlFor="home">Home</label>
+                        <input type="radio" id="HOME" name="type" value="HOME" onChange={event => setType(event.target.value)} checked={type===Types.HOME}/>
+                        <label htmlFor="HOME">Home</label>
                     </div>
                     <div className="radioButton">
-                        <input type="radio" id="office" name="type" value="office" onChange={event => setType(event.target.value)} checked={type==="office"}/>
-                        <label htmlFor="office">Office</label>
+                        <input type="radio" id="OFFICE" name="type" value="OFFICE" onChange={event => setType(event.target.value)} checked={type===Types.OFFICE}/>
+                        <label htmlFor="OFFICE">Office</label>
                     </div>
                 </div>
             </div>

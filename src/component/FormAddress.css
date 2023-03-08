@@ -48,6 +48,11 @@ form>.formButtons {
 }
 
 form>.formButtons>button {
-    width: 70px;
+    width: 80px;
+    height: 35px;
     padding: 5px;
+    border-radius: 10% 50% 10% 50%;
+    cursor: pointer;
+    font-size: 15px;
+    background: lightblue;
 }

@@ -8,7 +8,7 @@
 .card {
     position: relative;
     display: flex;
-    width: 250px;
+    width: 350px;
     flex-direction: row;
     justify-content: flex-start;
 }

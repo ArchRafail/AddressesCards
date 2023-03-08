@@ -3,7 +3,8 @@ import "./AddressesList.css"
 import Address from "./Address";
 import FormAddress from "./FormAddress";
 
-export default function AddressesList(props) {
+
+export default function AddressesList() {
     const ADDRESSES_URL = "https://6405ae1ceed195a99f89363f.mockapi.io/api/addresses"
 
     let [addresses, setAddresses] = useState([])
@@ -68,6 +69,7 @@ export default function AddressesList(props) {
                 .then(response => {
                     if (response.ok) {
                         setAddresses([])
+                        setSelectedItem(null);
                         getAddresses();
                         return;
                     }

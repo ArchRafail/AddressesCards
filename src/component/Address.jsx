@@ -1,5 +1,7 @@
 import {useState} from "react";
 import "./Address.css"
+import {Types} from "../constants/Types.ts";
+
 
 export default function Address(props) {
     let [id] = useState(props.id)
@@ -19,7 +21,7 @@ export default function Address(props) {
     return (
         <div className="wrapper">
             <div className="card">
-                <div className="image">{type==="home" ? <img className="addressIcon" src="https://cdn.iconscout.com/icon/premium/png-256-thumb/home-1757580-1495274.png" alt="Home"/> :
+                <div className="image">{type===Types.HOME ? <img className="addressIcon" src="https://cdn.iconscout.com/icon/premium/png-256-thumb/home-1757580-1495274.png" alt="Home"/> :
                     <img className="addressIcon" src="https://cdn.iconscout.com/icon/premium/png-256-thumb/company-2687916-2229475.png" alt="Office"/>}</div>
                 <div className="description">
                     <div className="text">{id}</div>
