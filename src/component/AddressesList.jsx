@@ -10,37 +10,31 @@ export default function AddressesList(props) {
     let [loading, setLoading] = useState(false)
     let [error, setError] = useState(undefined)
     let [selectedItem, setSelectedItem] = useState(null)
-    let [refresh, setRefresh] = useState(0)
 
     useEffect(() => {
         const abortController = new AbortController();
-
-        const getAddresses = async () =>  {
-            setLoading(true);
-            await fetch(ADDRESSES_URL, { signal: abortController.signal })
-                .then(response => {
-                    setLoading(false);
-                    if (response.ok) {
-                        return response.json()
-                    }
-                    throw new Error("Failed to load Addresses")
-                })
-                .then(data => setAddresses(data))
-                .catch(err => {
-                    if (err.name !== "AbortError") {
-                        console.error(err.message);
-                        setError(err.message)
-                    }
-                })
-            // setRefresh(refresh+1);
-        };
-
         getAddresses();
-
         return () => {
             abortController.abort();
         };
-    }, [refresh])
+    }, [])
+
+    const getAddresses = async () =>  {
+        setLoading(true);
+        await fetch(ADDRESSES_URL)
+            .then(response => {
+                setLoading(false);
+                if (response.ok) {
+                    return response.json()
+                }
+                throw new Error("Failed to load addresses")
+            })
+            .then(data => setAddresses(data))
+            .catch(err => {
+                console.error(err.message);
+                setError(err.message)
+            })
+    };
 
     const addressUpdate = (updatedAddressId) => setSelectedItem(addresses.find(address => address.id === updatedAddressId));
 
@@ -51,10 +45,10 @@ export default function AddressesList(props) {
             })
             .then(response => {
                 if (response.ok) {
-                    setRefresh(refresh+1);
+                    getAddresses();
                     return;
                 }
-                throw new Error("Failed to delete address")
+                throw new Error("Failed to delete an address")
             })
             .catch(err => {
                 console.error(err.message);
@@ -73,10 +67,11 @@ export default function AddressesList(props) {
             })
                 .then(response => {
                     if (response.ok) {
-                        setRefresh(refresh + 1);
+                        setAddresses([])
+                        getAddresses();
                         return;
                     }
-                    throw new Error("Failed to added address")
+                    throw new Error("Failed to update an address")
                 })
                 .catch(err => {
                     console.error(err.message);
@@ -90,10 +85,10 @@ export default function AddressesList(props) {
             })
             .then(response => {
                 if (response.ok) {
-                    setRefresh(refresh+1);
+                    getAddresses();
                     return;
                 }
-                throw new Error("Failed to update address")
+                throw new Error("Failed to add an address")
             })
             .catch(err => {
                 console.error(err.message);
