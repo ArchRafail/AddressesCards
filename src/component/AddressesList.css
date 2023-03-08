@@ -1,0 +1,121 @@
+.AddressesList {
+    padding: 24px;
+}
+
+.error {
+    color: red;
+}
+
+.no-data {
+    color: lightgrey;
+}
+
+.addresses {
+    width: 100%;
+    margin: auto;
+}
+
+/* Loading animation*/
+
+.loaderСontainer {
+    display: block;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.innerСontainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.innerСontainer .ring {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    margin: -10px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top: 2px solid #24ecff;
+    animation: animate 3s linear infinite;
+}
+
+.innerСontainer .ring::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    border-radius: 50%;
+    width: 7px;
+    height: 7px;
+    background: #24ecff;
+    box-shadow: 0 0 0 3px #24ecff33, 0 0 0 6px #24ecff22, 0 0 0 10px #24ecff11;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.innerСontainer .ring:nth-child(2) {
+    border-top: 2px solid transparent;
+    border-left: 2px solid #93ff2d;
+    animation: animate2 3s linear infinite;
+    animation-delay: -0.5s;
+}
+
+.innerСontainer .ring:nth-child(2)::before {
+    content: '';
+    position: absolute;
+    top: initial;
+    bottom: 3px;
+    left: 3px;
+    border-radius: 50%;
+    width: 7px;
+    height: 7px;
+    background: #93ff2d;
+    box-shadow: 0 0 0 3px #93ff2d33, 0 0 0 6px #93ff2d22, 0 0 0 10px #93ff2d11;
+}
+
+@keyframes animate2 {
+    0% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.innerСontainer .ring:nth-child(3) {
+    position: absolute;
+    top: -22.22px;
+    border-top: 2px solid transparent;
+    border-left: 2px solid #e41cf8;
+    animation: animate2 3s linear infinite;
+    animation-delay: -2s;
+}
+
+.innerСontainer .ring:nth-child(3)::before {
+    content: '';
+    position: absolute;
+    top: initial;
+    bottom: 3px;
+    left: 3px;
+    border-radius: 50%;
+    width: 7px;
+    height: 7px;
+    background: #e41cf8;
+    box-shadow: 0 0 0 3px #e41cf833, 0 0 0 6px #e41cf822, 0 0 0 10px #e41cf811;
+}
+
+.innerСontainer p {
+    position: absolute;
+    font-size: 1.2em;
+    bottom: -60px;
+    letter-spacing: 0.05em;
+}
